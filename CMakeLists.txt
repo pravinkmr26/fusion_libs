@@ -88,11 +88,18 @@ if(BUILD_TESTING)
   $<INSTALL_INTERFACE:include>
   ${EIGEN3_INCLUDE_DIRS}
   )
-
-  message("eigen3 - ${EIGEN3_INCLUDE_DIRS}")
-  message("nav_msgs - ${nav_msgs_INCLUDE_DIRS}")
-  
   ament_target_dependencies(test_adaptable_matrix nav_msgs Eigen3)
+
+  ament_add_gtest(test_adaptable_states
+  src/test/test_adaptable_states.cpp)
+
+  target_include_directories(test_adaptable_states PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+  ${EIGEN3_INCLUDE_DIRS}
+  )
+  ament_target_dependencies(test_adaptable_states nav_msgs Eigen3)
+
 
 endif()
 
