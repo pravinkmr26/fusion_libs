@@ -23,7 +23,7 @@ TEST(AdaptableEMatrix, test_convariance_adapt) {
     0.2,        0.0,          0.0,        0.0,        0.0,      0.20,
     0.0,        0.0,          0.0,        0.0,        0.0,      0.0,
     0.0,        0.0,          0.0,        0.0,        0.0,      0.0,
-    0.0,        0.0,          0.0,        0.0,        0.0,      0. 0,
+    0.0,        0.0,          0.0,        0.0,        0.0,      0.0,
     0.7,        0.20,         0.0,        0.0,        0.0,      0.01
   };
 
@@ -38,8 +38,9 @@ TEST(AdaptableEMatrix, test_convariance_adapt) {
 
   std::vector<MatrixIdx> required_states = {MatrixIdx::X, MatrixIdx::Y,
                                             MatrixIdx::C};
-  AdaptableMatrix<double, 6, Eigen::Matrix<double, 6, 6, Eigen::RowMajor>>
-      matrix(odom.twist.covariance);
+  // AdaptableMatrix<double, 6, Eigen::Matrix<double, 6, 6, Eigen::RowMajor>>
+  //     matrix(odom.twist.covariance);
+  FlexiMatrix<double, 6, 6> matrix(odom.twist.covariance);
   auto output_matrix = matrix.getMatrix(required_states);
 
   EXPECT_EQ(output_matrix.rows(), required_states.size());
